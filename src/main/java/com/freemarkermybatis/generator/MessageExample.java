@@ -114,6 +114,7 @@ public class MessageExample {
             if (value == null) {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
+
             criteria.add(new Criterion(condition, value));
         }
 

@@ -41,7 +41,20 @@ public class ListActionController {
         request.setAttribute("description", description);
         List<Message> listMessage = new ArrayList<Message>();
 
-        listMessage = messageDao.selectByExample(null);
+        MessageExample example = new MessageExample();
+        MessageExample.Criteria criteria = example.createCriteria();
+
+        if (command != null)
+        {
+            criteria.andCommandEqualTo(command);
+        }
+
+        if (description != null && !"".equals(description.trim()))
+        {
+            criteria.andDescriptionLike("%"+description+"%");
+        }
+
+        listMessage = messageDao.selectByExample(example);
 //        List<message> listMessage = service.SearchMessageList(command, description);
         if (null != listMessage)
         {
