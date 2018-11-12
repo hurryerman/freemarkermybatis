@@ -44,7 +44,7 @@ public class ListActionController {
         MessageExample example = new MessageExample();
         MessageExample.Criteria criteria = example.createCriteria();
 
-        if (command != null)
+        if (command != null && !"".equals(command.trim()))
         {
             criteria.andCommandEqualTo(command);
         }

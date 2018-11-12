@@ -18,9 +18,7 @@
                   and ${criterion.condition}
                 </when>
                 <when test="criterion.singleValue">
-                  <if test="criterion.value != null and !&quot;&quot;.equals(criterion.value.toString()) ">
-                    and ${criterion.condition} #{criterion.value}
-                  </if>
+                  and ${criterion.condition} #{criterion.value}
                 </when>
                 <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
