@@ -96,6 +96,7 @@ public class ListActionController {
             modelMap.addAttribute("ListMessage", listMessage);
         }
 
+        //测试同步;
         return  "ListAction";
     }
 }
