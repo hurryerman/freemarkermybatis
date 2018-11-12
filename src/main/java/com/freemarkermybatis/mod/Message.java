@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author 
  */
 public class Message implements Serializable {
-    /**
+    /*
      * 主键
      */
     private Integer id;

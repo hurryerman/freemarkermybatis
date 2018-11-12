@@ -1,6 +1,9 @@
 package com.freemarkermybatis.controller;
 
+import com.freemarkermybatis.dao.MessageDao;
+import com.freemarkermybatis.generator.MessageExample;
 import com.freemarkermybatis.mod.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,9 @@ import java.util.List;
 @Controller
 public class ListActionController {
 
+    @Autowired
+    private MessageDao messageDao;
+
     @RequestMapping("/ListAction")
     public String ListAction(ModelMap modelMap) throws UnsupportedEncodingException {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -34,62 +40,8 @@ public class ListActionController {
         request.setAttribute("command",command);
         request.setAttribute("description", description);
         List<Message> listMessage = new ArrayList<Message>();
-//        MessageDao dao = new MessageDao() {
-//            @Override
-//            public long countByExample(MessageExample example) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public int deleteByExample(MessageExample example) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public int deleteByPrimaryKey(Integer id) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public int insert(Message record) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public int insertSelective(Message record) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public List<Message> selectByExample(MessageExample example) {
-//                return null;
-//            }
-//
-//            @Override
-//            public Message selectByPrimaryKey(Integer id) {
-//                return null;
-//            }
-//
-//            @Override
-//            public int updateByExampleSelective(Message record, MessageExample example) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public int updateByExample(Message record, MessageExample example) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public int updateByPrimaryKeySelective(Message record) {
-//                return 0;
-//            }
-//
-//            @Override
-//            public int updateByPrimaryKey(Message record) {
-//                return 0;
-//            }
-//        }
+
+        listMessage = messageDao.selectByExample(null);
 //        List<message> listMessage = service.SearchMessageList(command, description);
         if (null != listMessage)
         {
