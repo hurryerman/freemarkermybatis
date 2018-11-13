@@ -1,8 +1,7 @@
 package com.freemarkermybatis.controller;
 
 import com.freemarkermybatis.Service.ListService;
-import com.freemarkermybatis.dao.MessageDao;
-import com.freemarkermybatis.generator.MessageExample;
+import com.freemarkermybatis.Service.MaintainService;
 import com.freemarkermybatis.mod.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,41 +10,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
-
-/*
-* 列表页面初始化;
-* */
 @Controller
-public class ListActionController {
+public class DeleteOneActionController {
 
     @Autowired
-    private ListService listService;
+    private MaintainService maintainService;
 
-    @RequestMapping("/ListAction")
-    public String ListAction(ModelMap modelMap) throws UnsupportedEncodingException {
+    @RequestMapping("/DeleteOneAction")
+    public String DeleteOneAction(ModelMap modelMap) throws UnsupportedEncodingException {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         request.setCharacterEncoding("UTF-8");
         HttpServletResponse response = requestAttributes.getResponse();
-        String command = request.getParameter("command");
-        String description = request.getParameter("description");
+        String Id = request.getParameter("Id");
 
         response.setCharacterEncoding("UTF-8");
 
-        request.setAttribute("command",command);
-        request.setAttribute("description", description);
+        maintainService.DeleteOne(Id);
 
-        List<Message> listMessage = listService.ListGet(command,description);
-        if (null != listMessage)
-        {
-            modelMap.addAttribute("ListMessage", listMessage);
-            modelMap.addAttribute("ListSize",listMessage.size());
+        try {
+            request.getRequestDispatcher("/ListAction").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         //测试同步;

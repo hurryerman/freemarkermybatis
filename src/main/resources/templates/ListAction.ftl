@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE" />
     <title>内容列表页面</title>
     <link href="/css/all.css" rel="stylesheet" type="text/css" />
+    <script src="/Js/common/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <script src="/Js/ListAction.js" type="text/javascript"></script>
 </head>
 <body style="background: #e1e9eb;">
 <h1>${rcPath}</h1>
@@ -13,7 +15,7 @@
     <div class="right">
         <div class="current">当前位置：<a href="javascript:void(0)" style="color:#6E6E6E;">内容管理</a> &gt; 内容列表</div>
         <div class="rightCont">
-            <p class="g_title fix">内容列表 <a class="btn03" href="#">新 增</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn03" href="#">删 除</a></p>
+            <p class="g_title fix">内容列表 <a class="btn03" href="#">新 增</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn03" href="javascript:DeleteBatch();">删 除</a></p>
             <table class="tab1">
                 <tbody>
                 <tr>
@@ -46,20 +48,20 @@
                     <tr>
                         </#if>
 
-                        <td><input type="checkbox" /></td>
+                        <td><input type="checkbox" name="Id" value="${mes.id}"/></td>
                         <td>${mes_index}</td>
                         <td>${mes.command}</td>
                         <td>${mes.description}</td>
                         <td>
                             <a href="#">修改</a>&nbsp;&nbsp;&nbsp;
-                            <a href="#">删除</a>
+                            <a href="/DeleteOneAction?Id=${mes.id}">删除</a>
                         </td>
                     </tr>
                     </#list>
                     </tbody>
                 </table>
                 <div class='page fix'>
-                    共 <b>4</b> 条
+                    共 <b>${ListSize}</b> 条
                     <a href='###' class='first'>首页</a>
                     <a href='###' class='pre'>上一页</a>
                     当前第<span>1/1</span>页
